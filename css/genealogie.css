@@ -1,0 +1,105 @@
+/* styles de l'arbre généalogique */
+
+#arbreGenealogique {
+	margin-left: auto; 
+	margin-right: auto; 
+	width:85%;
+	text-align:justify;
+	background-color:#FFFFFF;	
+}
+
+#arbreLegende {
+	text-align:center;
+	background-color:#5F8CA3;
+	font-weight:bold;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px; 
+	height:45px ;
+	vertical-align:middle;
+	margin-top:15px ;
+	margin-bottom:25px ;
+}
+
+.arbreSousLegende {
+	background-color:#5F8CA3;
+	font-weight:bold;
+	height:35px ;
+	margin-bottom:15px ;
+	margin-top:15px ;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.genTable {
+	width:100%
+	margin-top:10px ;
+	margin-bottom:10px ;
+}
+
+.genTableImage {
+	text-align:right;
+	vertical-align:top;
+}
+
+.genBlocPersonne {
+	position:relative;
+	/*height:60px ;*/
+}
+
+.genImage {
+	display:inline;
+	top:0px;
+	left:0px;
+	text-align:left;
+}
+/*
+.genPersonne {
+	position:relative;
+	left:80px;
+	top:-60px;
+}*/
+
+.casePersonne {
+	position:relative;
+	height : 75px ;
+}
+
+.nom {
+	font-weight:bold;
+}
+
+.genInformation {
+	font-style:italic;
+	width:90%;
+}
+
+
+
+/* seconde partie - arbre svg */
+
+.SVGligne {
+	stroke:black;
+	stroke-width:1px;
+	fill:none ;
+	stroke-linejoin:round;
+}
+
+.SVGligneCouleur1 {
+	stroke:red;
+}
+
+.SVGligneCouleur2 {
+	stroke:blue;
+}
+
+.SVGligneCouleur2 {
+	stroke:green;
+}
+
+.SVGligneCouleur4 {
+	stroke:black;
+}
+
+.SVGligneAdoptif{
+	stroke-dasharray:5px,5px;
+}

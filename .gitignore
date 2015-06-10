@@ -41,3 +41,21 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#==========================
+# fichiers à ignorer 
+#==========================
+/cartes
+/dataimg
+/doc
+/img_dynasties
+/img_evt
+/img_personnes
+/img_tags
+/font
+/local
+/sauvegardes
+/scriptaculous
+/sql
+/test
+

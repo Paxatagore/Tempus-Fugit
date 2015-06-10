@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chronologie</title>
+	<meta charset="UTF-8">
+	
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBcWJ9LIYVIU1DvkueG-EY6ajNb2jBBuhk&sensor=false"></script>
+	<script type="text/javascript" src="../local/localisation.js"></script>
+	<script type="text/javascript" src="../js/prototype.js"></script>
+	<script type="text/javascript" src="../scriptaculous/scriptaculous.js?load=effects,controls"></script>
+	<script type="text/javascript" src="../js/commun.js"></script>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/formulaires.js"></script>
+	<script type="text/javascript" src="../js/chronologie.js"></script>
+	<script type="text/javascript" src="../js/tags.js"></script>	
+	<script type="text/javascript" src="../js/evenements.js"></script>	
+	<script type="text/javascript" src="../js/liens.js"></script>
+	<script type="text/javascript" src="../js/typeEvenement.js"></script>
+	<script type="text/javascript" src="../js/tagsThematiques.js"></script>
+	<script type="text/javascript" src="../js/calendriers.js"></script>
+	<script type="text/javascript" src="../js/scripts.js"></script>	
+	<script type="text/javascript" src="../js/genealogie.js"></script>	
+	<script type="text/javascript" src="../js/carte.js"></script>	
+	<link rel="stylesheet" type="text/css" href="../css/ordinaire.css" media="screen and (min-width: 720px)" />
+	<link rel="stylesheet" type="text/css" href="../css/evenements.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../css/mini.css" media="screen and (min-width:720px) and (max-width: 1024px)" />
+	<link rel="stylesheet" type="text/css" href="../css/portable.css" media="screen and (max-width: 720px)" />
+	<link rel="stylesheet" type="text/css" href="../css/form_ordinaire.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../css/genealogie.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="../css/imprimante.css" media="print" />
+	<link rel="icon" type="image/png" href="http://www.steppe.fr/images/cavaliermongol.png" />
+	<base target="_blank" />
+</head>
+<body>
+
+<div id="mainConteneur">
+	<div id="messager"></div>
+
+	<nav id="mainMenu">
+		<li id="menuEvenements"><a>Evenements</a></li> 
+		<li id="menuPersonnes"><a>Personnes</a></li> 
+		<li id="menuAjouter"><a>Afficher</a>
+			<nav id="subMenuAjfficher" class="subMenu">
+				<li id="menuRequetes"><a>Requêtes</a></li> 
+				<li id="menuTags"><a>Tags</a></li>
+				<li id="menuFonctions"><a>Fonctions</a></li>
+				<li id="menuDynasties"><a>Dynasties</a></li>
+				<li id="menuScripts"><a>Scripts</a></li> 
+			</nav>			
+		</li>
+		<li id="menuAjouter"><a>Ajouter</a>
+			<nav id="subMenuAjouter" class="subMenu">
+				<li id="menuAddEvenement"><a>Evenement</a></li>
+				<li id="menuAddPersonne"><a>Personne</a></li>
+				<li id="menuAddTag"><a>Tag</a></li>
+				<li id="menuAddDynastie"><a>Dynastie</a></li>
+				<li id="menuAddFonction"><a>Fonction</a></li>
+			</nav>
+		</li>
+		<li id="menuThematique"><a>Thématiques</a>
+			<nav class="subMenu" id="subMenuThematique">
+				<li><a id="chronoMode" onClick="donnees.setModeColorisation(1)">Afficher</a></li>
+				<li><a><hr></a></li>
+			</nav>
+		</li> 
+		<li id="menuTypes"><a>Types</a>
+			<nav class="subMenu" id="subMenuTypes" class="subMenu">
+				<li><a id="chronoMode" onClick="donnees.setModeColorisation(0)">Afficher</a></li>
+				<li><a id="chronoMode" onClick="lesTypesdEvenements.modeChronos();">Mode Chronos</a></li>
+				<li><a><hr></a></li>
+			</nav>
+		</li> 
+		<li id="menuEtoiles"><a>Etoiles</a>
+			<nav class="subMenu" id="subMenuEtoiles" class="subMenu"></nav>
+		</li> 
+	</nav>
+
+	<div id="conteneurFormulaire">
+		<form id="edition" action="javascript:void%200"></form>
+	</div>
+	
+	<!-- Titre de la page et requêteur complexe : s'affiche en permanence -->
+	<div class="section" id="blocTete">
+		<div id="titre">Chargement de la requête....</div>
+		<form id="requeteurComplexe">
+			<table>
+			<tr>
+				<td><span class="requeteurComplexeLegende">Date de début<span></td>
+				<td><span class="requeteurComplexeLegende">Date de fin<span></td>
+				<td><span class="requeteurComplexeLegende">Tags<span></td>
+				<td><span class="requeteurComplexeLegende">Personnes<span></td>
+			</tr>
+			<tr>
+				<td><input type="text" id="rcdatedepart" value="" name="rcdatedepart" class="petitF" /></td>
+				<td><input type="text" id="rcdatefin" value="" name="rcdatefin" class="petitF" /></td>
+				<td><input type="text" id="rctags" value="" name="rctags" class="normalF" /><div class="autocomplete" id="upd_rctags"></div></td>
+				<td><input type="text" id="rcpersonnes" value="" name="rcpersonnes" class="normalF" /><div class="autocomplete" id="upd_rcpersonnes"></div></td>
+				<td><input type="reset" value="Vider" title="Vider" id="resetForm" class="requeteurComplexeBoutton"></td>
+				<td><input type="button" value="Personne aléatoire" title="Personne aléatoire" id="persAlea2" class="requeteurComplexeBoutton"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><span class="requeteurComplexeLegende">Recherche<span></td>
+				<td><span class="requeteurComplexeLegende">Fonctions<span></td>
+				<td><span class="requeteurComplexeLegende">Dynasties<span></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="text" id="rcrecherche" value="" name="rcrecherche" class="normalF" /></td>
+				<td><input type="text" id="rcfonction" value="" name="rcfonction" class="normalF" /><div class="autocomplete" id="upd_rcfonction"></div></td>
+				<td><input type="text" id="rcdynastie" value="" name="rcdynastie" class="normalF" /><div class="autocomplete" id="upd_rcdynastie"></div></td>
+				<td><input type="submit" value="Envoyer la requête" title="Envoyer la requête" id="rcsubmit" class="requeteurComplexeBoutton"></td>
+			</tr>
+			</table>
+		</form>
+	</div>
+	
+	<div id="blocTete2">
+
+		<div id="navigation_evenements" class="section">
+			<div>
+				<span id="carteToggle" onClick="carte.toggle();">Montrer la carte</span>
+				<span id="contexte"> | 
+					<span id="contexte2">Masquer le contexte</span>
+					<span id="contexte3">Montrer le contexte</span> 
+					(<span id="contexteNum"></span>)
+				</span>
+			</div>
+			<div><span  id="intervallesNavigation"> |</span></div>
+			<div id="navigation"></div>
+			<div id="carte"></div>
+		</div>
+		
+		<div id="navigation_personnes" class="section">
+			<div class="contenuSection">
+				<span id="personneParLettres"></span> - 
+				<span id="selectionpersonnes">
+					<span id="selectionpersonnesTous" class="cliquable choixSelectionne"  title="Afficher toutes les personnes">Tous</span> |
+					<span id="selectionpersonnesInvalides" class="cliquable"  title="Afficher les personnes à valider">Invalides</span> |
+					<span id="selectionpersonnesHorsRegnes" class="cliquable"  title="Afficher les personnes, à l'exception de ceux qui ne sont que sur un évènement de type règne.">Hors règnes</span>
+				</span>
+			</div>
+		</div>
+		
+		<div id="navigation_requetes" class="section titreDeSection">Requêtes</div>
+		
+		<div id="navigation_tags" class="section">
+			<span class="menuParLettres" id="tagParLettres"></span> - Recherche : <input type="text" class="champRechercher" id="boiteRecherchertagChamp" value="" name="search" size="20">
+		</div>
+		
+		<div id="navigation_fonctions" class="section">
+			<span class="menuParLettres" id="fonctionParLettres"></span> - Recherche : <input type="text" class="champRechercher" id="boiteRechercherfonctionChamp" value="" name="search" size="20">
+		</div>
+		
+		<div id="navigation_dynasties" class="section">
+			<span class="menuParLettres" id="dynastieParLettres"></span> - Recherche : <input type="text" class="champRechercher" id="boiteRechercherdynastieChamp" value="" name="search" size="20">
+		</div>
+		
+		<div id="navigation_scripts" class="section">Scripts</div>
+		
+		<div id="navigation_arbre" class="section titreDeSection">
+			Arbre généalogique <span id="arbreNom"></span>
+		</div>
+		
+		<div id="navigation_arbredynastique" class="section titreDeSection">
+			Arbre généalogique de la dynastie <span id="arbreDynastiqueNom"></span>
+		</div>
+
+	</div>
+
+	<table id="lesEvenements" class="dataTable">
+		<thead>
+			<tr class="legendeTableau">
+				<td>Dates</td>
+				<td id="boitenEvenements"><span id="nEvenementAffiches"></span> évènements affichés sur <span id="nEvenement"></span> <span id="actualiserAffichage" class="cliquable">(actualiser)</span></td>
+			</tr>
+		</thead>
+		<tbody id="listeEvenements">
+		</tbody>
+	</table>
+
+	<table id="lesPersonnes" class="dataTable">
+		<thead>
+			<tr class="legendeTableau">
+				<td colspan="3"><span class="titreDeSection" id="nPersonnes"></span> personnes</td>
+			</tr>
+			<tr class="legendeTableau">
+				<td></td>
+				<td>Identité</td>
+				<td>Précisions</td>
+			</tr>
+		</thead>
+		<tbody  id="listePersonnes"></tbody>
+	</table>
+
+	<table id="lesRequetes" class="dataTable">
+		<thead>
+			<tr class="legendeTableau">
+				<td>Requête</td>
+				<td>Evenements</td>
+				<td>Personnes</td>
+				<td>Date et Heure</td>
+			</tr>
+		</thead>
+		<tbody id="listeRequetes">
+		</tbody> 
+	</table>
+
+	<table id="lesTags" class="dataTable">
+		<thead>
+			<tr class="legendeTableau">
+				<td colspan="4"><span id="nTags"></span> tags</td>
+			</tr>
+			<tr class="legendeTableau">
+				<td>Drapeau</td>
+				<td>Nom</td>
+				<td>Pères</td>
+				<td>Fils</td>
+			</tr>
+		</thead>
+		<tbody id="listeTags">
+		</tbody>
+	</table>
+
+	<table id="lesFonctions" class="dataTable">
+		<thead>
+			<tr class="legendeTableau">
+				<td colspan="2"><span id="nFonctions"></span> fonctions</td>
+			</tr>
+			<tr class="legendeTableau">
+				<td width="50%">Nom</td>
+				<td width="50%">Informations</td>
+			</tr>
+		</thead>
+		<tbody id="listeFonctions">
+		</tbody>
+	</table>
+
+	<table id="lesDynasties" class="dataTable">
+		<thead>
+			<tr class="legendeTableau">
+				<td colspan="3"><span id="nDynasties"></span> dynasties</td>
+			</tr>
+			<tr class="legendeTableau">
+				<td>Armes</td>
+				<td>Nom</td>
+				<td>Notes</td>
+			</tr>
+		</thead>
+		<tbody id="listeDynasties">
+		</tbody>
+	</table>
+
+	<div class="section" id="lesScripts">
+		<div id="listeScripts"></div>
+	</div>
+
+	
+	<div id="lesArbres">
+		<div class="arbreSousLegende">Ascendants</div>
+		<div id="arbreAscendants"></div>
+		<div id="arbreAscendants3"></div>
+		<div id="arbreDescendantsLeg" class="arbreSousLegende">Descendants</div>
+		<div id="arbreDescendants"></div>
+	</div>
+
+	<div id="lesArbreDynastique">
+		<div id="arbreDynastiqueContenu"></div>
+	</div>
+
+<div id="addItems">
+	<div>
+		<span title="mode Chronos" id = "mChronos"> Chr </span>
+		<span title="anti-mode Chronos" id = "antimChronos"> NoChr </span>
+	</div>
+	<div>
+		<span title="Ajouter un évènement simple" id="addEvS"> Es </span>
+		<span title="Ajouter un évènement" id="addEv"> E </span>
+		<span title="Ajouter un règne" id="addEvR"> R </span>
+	</div>
+</div>
+<div id="conteneurPhoto"><span id="photo"></span></div>
+<div id="fin">CTFA <span id="version"></span></div>
+</div>
+</body>
+</html>

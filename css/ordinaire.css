@@ -1,0 +1,436 @@
+/* feuille de style destinée à l'affichage des évènements de façon générique et ordinaire */
+/* tonalité générale : bleu-vert  */
+
+/* le body*/
+body {
+	background-color:#ffffff ;
+	font-family: Garamond, Georgia, arial, serif; 
+}
+
+#mainConteneur {
+	width:1024px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 20px;
+}
+
+#conteneurPhoto {
+	width:1024px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	position:fixed;
+	top:0px;
+	background-color:#000000;
+}
+
+/* éléments généraux */
+
+a {
+	text-decoration:none;
+}
+
+.cliquable {
+	color:black;
+	border-bottom-style:dotted;
+	border-bottom-width:1px;
+	border-bottom-color:grey;
+}
+
+.cliquable:hover {
+	color: #C4D7ED;
+}
+
+
+/* messager */
+
+#messager {
+	background-color:#C4D7ED;
+	left:0px;
+	top:0px;
+	display:none;
+	font-weight:bold;
+	width:100%;
+	height:30px;
+}
+
+#addItems {
+	position:fixed;
+	right:2px;
+	bottom:2px;
+	font-size:large;
+	border-style: solid;
+	border-width:1px;
+	border-color:#046380;
+	border-radius:6px;
+	background-color: #C4D7ED;
+}
+
+#addItems span {
+	padding-right: 12px;
+	padding:8px;
+}
+
+/*menu */
+
+#mainMenu, #mainMenu nav /* Liste */    
+{
+	padding : 0; /* pas de marge intérieure */
+	margin : 0; /* ni extérieure */
+	list-style : none; /* on supprime le style par défaut de la liste */
+	line-height : 25px;  /*on définit une hauteur pour chaque élément */
+	text-align : center; /* on centre le texte qui se trouve dans la liste */
+	padding-top:5px;
+}
+ 
+#mainMenu /* Ensemble du menu */ {
+	background-color:#C4D7ED ;
+	height:25px;
+	font-size:small
+}
+
+#mainMenu a /* Contenu des listes */
+{
+	display : block; /* on change le type d'élément, les liens deviennent des balises de type block */
+	padding : 0; /* aucune marge intérieure */
+	background : #C4D7ED; /* couleur de fond */       
+	color : #000000; /* couleur du texte */
+	text-decoration : none; /* on supprime le style par défaut des liens (la plupart du temps = souligné) */
+	width : 144px; /* largeur */
+}
+
+#mainMenu a.menuItemGrise {
+	color:#B0CC99;
+}
+
+#mainMenu a.menuItemGrise :hover{
+	background-color:#375D81;
+	color:#B0CC99;
+}
+
+#mainMenu a:hover /* Lorsque la souris passe sur un des liens */   
+{
+	background-color:#183152;
+	color:#ffffff;
+}
+
+#mainMenu li /* Éléments des listes */     
+{ 
+	float : left; 
+	/* pour IE qui ne reconnaît pas "transparent" */
+	border-right : 1px solid #fff; /* on met une bordure blanche à droite de chaque élément */
+}
+ 
+/* IE ne reconnaissant pas le sélecteur ">" */
+html>body #mainMenu li
+{
+	border-right: 1px solid transparent ; /* on met une bordure transparente à droite de chaque élément */
+}
+ 
+#mainMenu li nav /* Sous-listes */
+{ 
+	position: absolute; /* Position absolue */
+	width: 144px; /* Largeur des sous-listes */
+	left: -999em; /* Hop, on envoie loin du champ de vision */
+}
+
+#mainMenu li:hover nav nav, #mainMenu nav.sfhover nav nav /* Sous-sous-listes lorsque la souris passe sur un élément de liste */
+{
+	left: -999em; /* On expédie les sous-sous-listes hors du champ de vision */
+}
+ 
+#mainMenu li:hover nav, #mainMenu nav nav:hover nav, #mainMenu li.sfhover nav, #mainMenu nav nav.sfhover nav  /* Sous-listes lorsque la souris passe sur un élément de liste ET sous-sous-lites lorsque la souris passe sur un élément de sous-liste */
+{
+	left: auto; /* Repositionnement normal */
+	min-height: 0; /* Corrige un bug sous IE */
+}
+ 
+#mainMenu li nav li /* Eléments de sous-listes */
+{
+	/* pour ie qui ne reconnaît pas "transparent" (comme précédemment) */
+	border-top : 1px solid #fff; /* on met une bordure blanche en haut de chaque élément d'une sous-liste */
+}
+ 
+/* IE ne reconnaissant pas le sélecteur ">" */
+html>body #mainMenu li nav li                
+{
+	border-top : 1px solid transparent; /* on met une bordure transparente en haut de chaque élément */
+}
+ 
+#mainMenu li nav nav 
+{
+	margin    : -22px 0 0 144px ; /* On décale les sous-sous-listes pour qu'elles ne soient pas au dessus des sous-listes */
+	/* pour IE qui ne reconnaît pas "transparent" (comme précédemment) */
+	border-left     : 1px solid #fff ; /* Petite bordure à gauche pour ne pas coller ... */     
+}
+ 
+/* IE ne reconnaissant pas le sélecteur ">" ... je me répète ;-) */
+html>body #mainMenu li nav nav                
+{
+	border-left     : 1px solid transparent ; /* on met une bordure transparente sur la gauche de chaque élément */
+}
+
+
+.choixSelectionne {
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color:#EFECCA;
+	border-bottom-style:dotted;
+	border-bottom-width:1px;
+	border-bottom-color:red;
+}
+
+/* bloc tête */
+
+.section {
+	display:none ;
+	padding-left:40px ;
+	padding-right: 5px ;
+	padding-top: 7px ;
+	padding-bottom: 7px ;
+	font-size:small ;
+}
+
+/* en tête principal */
+#blocTete {
+	margin-top:15px;
+	background-color:#5F8CA3;
+}
+
+#titre {
+	font-size:large ;
+}
+
+#requeteurComplexe {
+	font-size:small ;
+}
+
+.requeteurComplexeBoutton {
+	font-size:small ;
+	width:100%;
+}
+
+.requeteurComplexeLegende {
+	font-size: x-small;
+	color:#F6E497;
+}
+
+.petitF {
+	width:60px ;
+}
+
+.normalF {
+	width:200px ;
+}
+
+/* bloc tête 2 */
+#navigation_evenements {
+	background-color:#5F8CA3;
+}
+#navigation_personnes {
+	background-color:#046380;
+}
+#navigation_requetes {
+	background-color:#E1E6FA;
+}
+#navigation_tags {
+	background-color:#C4D7ED;
+}
+#navigation_fonctions {
+	background-color:#ABC8E2;
+}
+#navigation_dynasties {
+	background-color:#A2B5BF;
+}
+#navigation_scripts {
+	background-color:#34393E;
+	color:#ffffff;
+}
+#navigation_arbre {
+	background-color:#5EB6DD;
+}
+#navigation_arbredynastique {
+	background-color:#8CC6D7;
+}
+
+
+/* sections */
+
+
+.titreDeSection {
+	font-weight:bold ;
+}
+
+.contenuSection {
+	font-size:small;
+}
+
+#navigation{
+	margin-bottom:30px;
+}
+	
+.uneLigne {
+	padding-bottom:25px;
+	border-spacing:5px 15px;
+}
+
+.caseTexte {
+	vertical-align: top;
+	padding-right:20px;
+	padding-bottom:15px;
+	padding-left:5px;
+}
+
+.caseImage {
+	max-width:140px;
+	vertical-align: top;
+	padding-right:20px;
+	padding-bottom:15px;
+	padding-left:5px;
+}
+
+.uneImage {
+	height: 45px;
+	max-width:140px;
+	vertical-align: top;
+}
+
+.caseImagedePersonne {
+	height: 120px;
+	vertical-align: top;
+}
+
+.uneImagedePersonne {
+	vertical-align: top;
+	max-height: 100px;
+	max-width:100px;
+}
+
+.uneCaseGras {
+	font-weight: bold;
+}
+
+.longueCase {
+	text-align:justify;
+}
+
+.unePetiteInfo {
+	font-size: small;
+	font-weight: normal;
+}
+
+.miniCase {
+	font-size: small;
+	width:25px;
+}
+
+/* recherches */
+
+#requested {
+	display:none;
+	width:200px;
+}
+
+
+/*tableaux */
+.legendeTableau {
+	padding:5px;
+	background-color:#ABC8E2;
+	text-align:center;
+}
+
+.uneLigne:hover {
+	background-color:#ABC8E2;
+}
+
+.dataTable {
+	width:1024px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display:none;
+}
+
+/* styles spécifiques aux évènements */
+
+.precisions {
+	font-size: small;
+}
+
+.evepere { /* indication de l'évènement père*/
+	padding-right: 5px;
+	font-size: 10px;
+	color: blue;
+	background-color:#CCC6AD;
+	border-bottom-style:dotted;
+	border-bottom-width:1px;
+}
+
+.tagPetiteImage {
+	height: 10px;
+}
+
+.liensel {
+	padding-right: 5px;
+	font-size: 10px;
+}
+
+.liensep {
+	padding-right: 5px;
+	font-size: 10px;
+}
+
+	
+/* scripts */
+
+.unScript {
+	position:relative;
+	padding-top:15px ;
+	height:40px;
+	left:40px ;
+}
+
+.novalide {
+	background-color:red;
+}
+
+.executionScript {
+	font-size:x-small ;
+	text-align:justify;
+	background-color:grey;
+}
+
+/*carte */
+
+#carte {
+	width:100%;
+	height:450px;
+	display:none;
+	text-align:center;
+}
+
+//gestion du contexte
+
+#contexte2 {
+	display:none ;
+}
+#contexte3 {
+	display:none ;
+}
+
+.contexte {
+	background-color:#C0BFA9;
+}
+
+/* fin */
+
+#fin {
+	clear:both;
+	padding-top:25px;
+	padding-bottom:5px;
+	font-size:xx-small;
+	text-align:center;
+}

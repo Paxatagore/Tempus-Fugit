@@ -1,0 +1,70 @@
+/* feuille de style destinée à l'impression de la liste des évènements */
+
+title {
+	display: none ;
+}
+
+body {
+	background: white;
+}
+
+#messager, #mainmenu, #conteneurFormulaire, #lespersonnes, #lesArbres, #lesArbreDynastique, #lesRequetes, #lesTags, #lesFonctions, #lesDynasties, #lesScripts, #addItems, #conteneurPhoto, #fin {
+	display: none ;
+}
+
+#menuEvenements, #menuPersonnes, #menuAjouter, #menuThematique, #menuTypes, #menuEtoiles {
+	display: none ;
+}
+
+#lesEvenements {
+	display : block ;
+}
+
+#titre {
+	display : block ;
+	font-size:x-large;
+	font-weight:bold;
+}
+
+#requested, #TagsNavigation, .menuParLettres, #carteToggle, #contexte, #intervallesNavigation, #navigation, #carte {
+	display: none ;
+}
+
+.legendeTableau, .liens {
+	display: none ;
+}
+
+.caseEvenement  {
+	padding-bottom:5px;
+	vertical-align: top;
+}
+
+.caseDate {
+	font-weight:bold;
+	vertical-align: top;
+}
+
+/* étoiles */
+.etoile0 {
+	font-size: small;
+}
+
+.etoile1 {
+	font-size: medium;
+}
+
+.etoile2 {
+	font-size: large;
+}
+
+.etoile3 {
+	font-size: x-large;
+}
+
+.precisions {
+	font-size:small;
+}
+
+.nvMillenaire {
+	font-size: x-large;
+}

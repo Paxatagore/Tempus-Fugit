@@ -1,0 +1,107 @@
+/* formulaires */
+
+#conteneurFormulaire {
+	
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#edition {
+	display:none ;
+	background-color:#ffffff;
+	padding:15px ;
+	margin-bottom:15px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.titreFormulaire {
+	text-align:center; 
+	background: #375D81;
+	color:#ffffff;
+	border: 1px solid #036635;
+	padding:8px 0;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+input:focus, textarea:focus, select:focus {
+	background: #ffd;
+}
+
+.formmenu {
+	text-align:center; 
+	background: #5F8CA3;
+	padding:8px 0;
+	margin: 1em 0 0;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+fieldset {
+	background: #ABC8E2;
+	margin: 1em 0 0;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+legend {
+	border: 1px solid blue;
+	background: #375D81;
+	color: white;
+	font-weight: bold;
+	padding: 0.5em 1em;
+}
+
+label {
+	font-weight: bold;
+	margin: 5px 5px 5px 0 ;
+	width:200px;
+	min-width:140px ;
+	vertical-align:top;
+	display: inline-block;
+}
+
+.submit {
+	text-align:center; 
+	background: #375D81;
+	padding:8px 0;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+/* champs spécifiques */
+
+.inputtag {
+	width:250px;
+}
+
+/* Autocomplétion */
+div.autocomplete {
+  position: absolute;
+  width: 400px;
+  background-color: white;
+  border: 1px solid #888;
+  margin: 0px;
+  padding: 0px;
+}
+ 
+div.autocomplete ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  max-height: 20em;
+  overflow: auto;
+}
+ 
+div.autocomplete ul li.selected {
+    background-color: #ffb;
+}
+ 
+div.autocomplete ul li {
+  list-style-type:none;
+  display: block;
+  margin: 0;
+  padding: 2px;
+  cursor: pointer;
+}

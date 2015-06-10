@@ -1,0 +1,179 @@
+.caseEvenement {
+	text-align:justify;
+	width:800px;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+	padding-bottom:25px;
+}
+
+.caseDate {
+	width:200px;
+	margin:0px;
+	vertical-align: top;
+	font-size: small;
+	font-weight:bold;
+}
+
+.image {
+	max-width:600px;
+	max-height:400px;
+}
+
+.oeuvreartdesc {
+	font-style:italic;
+}
+
+.regnedesc {
+	color: #589482;
+	font-weight:bold;
+}
+
+.batailledesc {
+	color: #34393E;
+}
+
+.guerredesc {
+	color: #4C767A;
+	font-weight:bold;
+}
+
+.traitedesc {
+	color: #183152;
+}
+
+.loi {
+	background-color: #E1E6FA;
+	border-color:#570906 ;
+	border-width:1px;
+	border-style:solid;
+}
+
+.periodehistoriquedesc {
+	color: #006D80;
+	font-weight:bold;
+}
+
+.tendancedesc {
+	color:#93A299;
+}
+
+.notice {
+	border-style:solid;
+	border-width:1px;
+	border-color:#132959;
+}
+
+.dyndesc {
+	color:#66858D;
+}
+
+.occdesc {
+	color:#C0BFA9;
+	font-weight:bold;
+}
+
+/* coloration et mise en formes par tags thématiques */
+
+.arts {
+	background-color:#046380;
+}
+
+.idees {
+	background-color:#C4D7ED;
+}
+
+.militaire {
+	background-color:#677E52;
+}
+
+.politique {
+	background-color:#B7CA79;
+}
+
+.religion {
+	background-color:#5F8CA3;	
+}
+
+.sciences {
+	background-color:#A2B5BF;
+	
+}
+
+.societe {
+	background-color:#FF5B2B;
+}
+
+.diplomatie {
+	background-color:#B0CC99;
+}
+
+.sports {
+	border-color:#FFDA8C
+}
+
+/* étoiles */
+.etoile0 {
+	font-size: small;
+}
+
+.etoile1 {
+	font-size: medium;
+}
+
+.etoile2 {
+	font-size: large;
+}
+
+.etoile3 {
+	font-size: x-large;
+}
+
+.nvMillenaire {
+	padding-top:30px;
+	font-size:xx-large;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B9121B;
+}
+
+.nvSiecle {
+	padding-top:20px;
+	font-size:x-large;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#FC7F3C;
+}
+
+.nvDecennie {
+	padding-top:15px;
+	font-size:large;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B1221C;
+}
+
+.nvAnnee {
+	padding-top:10px;
+	font:medium;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#663E10;
+}
+
+/*tags et personnes suggérés */
+
+.sugItem {
+	font-size: medium;
+	color:#89725B;
+	border-bottom-style:dotted;
+	border-bottom-width:1px;
+}
+
+/* produit de la recherche */
+
+.resultat {
+	border-bottom-style:dashed;
+	border-bottom-width:2px;
+	border-bottom-color:red;
+	background:#F6E497;
+}
