@@ -206,7 +206,7 @@ unFormulaire.prototype = {
 		if (date.versfin == 1) c = 'checked' ;
 		contenu.push('&nbsp<input type="checkbox" id="versfin' + champ + '" name="versfin' + champ + '[]" ' + this.tabInd() + ' value = "1" ' + c + ' class = "formInput"> ~  ') ;
 		//jour
-		contenu.push('<input id="jourfin' + champ + '" name="joursfin' + champ + '" size="2" value="' + date.jourfin + '" min="0" max="31"' + this.tabInd() + '>') ;
+		contenu.push('<input id="jourfin' + champ + '" name="jourfin' + champ + '" size="2" value="' + date.jourfin + '" min="0" max="31"' + this.tabInd() + '>') ;
 		//mois
 		contenu.push('<select ' + this.tabInd() + ' id="moisfin' + champ + '" name="moisfin' + champ + '">') ;
 		for (var i = 0 ; i < lesmois.length ; i++) {
