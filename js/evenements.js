@@ -35,6 +35,7 @@ lesEvenements.corrigeUne = function(e) {
 		}
 		e.precision2 = lesPrecisions2.join("") ;		//ensuite, on reconstitue une chaine en joignant les différents éléments du tableau
 	}
+	e.precision2 = e.precision2.split("\n").join('<br/>') ;
 	//2. éventuel élément de recherche
 	lesEvenements.corrigeRechercheFonction(e) ;
 	//détermination de la thématique dominante - par convention, c'est la première thématique indiquée
