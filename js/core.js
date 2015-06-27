@@ -298,7 +298,7 @@ lesPersonnes.afficheDates = function(p) {
 //Formulaire & modifications
 
 lesPersonnes.form = function(num) {
-	var p = this.getById(num) || {} ; 
+	var p = this.getById(num) || {lpp:[]} ; 
 	p.dynastie = lesDynasties.getById(p.dynastie) ;
 	p.dynastieNom = p.dynastie.nom || "" ;
 	var f = new unFormulaire (this, "une personne", p) ;
