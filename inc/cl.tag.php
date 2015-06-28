@@ -28,7 +28,7 @@ class tag extends alpha
 	var $coordonnees ;
 	
 	var $fields 	= array("num", "nom", "url", "drapeau", "nature", "couleur", "autreNom", "motscles", "adjectifs", "designation", "peres", "fils", "occurence", "occurenceJour", "latitude", "longitude") ;
-	var $jsonliste 	= array("num", "nom", "url", "drapeau", "nature", "couleur", "autreNom", "motscles", "adjectifs", "designation", "peres", "fils", "latitude", "longitude") ;
+	var $jsonliste 	= array("num", "nom", "url", "drapeau", "nature", "couleur", "autreNom", "motscles", "adjectifs", "designation", "peres", "fils", "occurence", "latitude", "longitude") ;
 	
 	public $lesNature = array(1=>"ville", 2=>"régime", 3=>"peuple", 4=>"dynastie", 5=>"Musée", 6=>"Continent", 7=>"Etat", 8=>"Concepts", 9=>"organisation", 10=>"courant de pensée", 11=>"Mer", 12=>"Ile", 13=>"Astre", 14=>"Etat fédéré") ;
 	//public $lesModeCreation = array(1 => "Fondation", 2 => "Unification") ;
