@@ -74,6 +74,7 @@ class relationpersonnes extends alpha
 				}
 			}
 		}
+		return 1 ;
 	}
 }
 ?>
