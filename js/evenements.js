@@ -8,7 +8,6 @@ var lesEvenements = new coreObjet("evenement") ;
 
 lesEvenements.importance 		= Array("Local", "Ordinaire", "Important", "Majeur") ;
 lesEvenements.lesTagsT 			= ["19", "22", "16", "15", "17", "21", "18", "20", "79"] ;
-lesEvenements.dateER2			= /^(vers|v.)?( ?)(\d+)?(?:er)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?(?:er)?( ?)(-?)( ?)(\d+)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?( ?)(,|:){1}( ?)/i ;			//pattern susceptible de trouver deux années entières positives uniquement
 lesEvenements.consulsRomains	= /\(\d+ (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)( \d?)? du calendrier romain\) /i
 lesEvenements.classeTemps 		= ["nvAnnee", "nvDecennie", "nvSiecle", "nvMillenaire"] ;
 lesEvenements.notesER			= /(?:[a-zéè»\)])(\d){1,2}/i
@@ -416,15 +415,68 @@ lesEvenements.form = function(x, option) {
 	$('boutonAnalyse').observe("click", function() { lesEvenements.analyse(e) ; }) ;
 } ;
 
+lesEvenements.dateER2			= /^(vers|v.)?( ?)(\d+)?(?:er)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?(?:er)?( ?)(-?)( ?)(\d+)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?( ?)(,|:){1}( ?)/i ;			//pattern susceptible de trouver deux années entières positives uniquement
+
 lesEvenements.analyse = function(e) {
-	//Analyse du contenu de l'évènement dans le formulaire
+	//Fonction d'analyse du contenu de l'évènement dans le formulaire
+	//d'abord, on fusionne les champs description et précisions.
 	var caa = $('description').value + $('precisions').value ;
-	caa = caa.strip() ;
+	caa = caa.strip() ;	//on enlève les espaces avant et après (FONCTION DE PROTOTYPE)
 	//1. Vérification de l'existence d'une date
-	//plusieurs possibilités
-	//
-	var dates2 = lesEvenements.dateER2.exec(caa) ;
+	//plusieurs possibilités à considérer
+	//(1950)
+	//(15) (janvier) (1950) 
+	//(15) (janvier) (1950) - (15) (avril) (1951)
+	//(15) (janvier) - (16) (mars) (1950)
+	//(15) - (18) (janvier) (1950)
+	//option au début : vers/v.
+	//à la fin : : ou ,
+	ERdate = /^(vers|v.)?( *)(\d+)?( )*(-)?( )*(\d+)?( )*(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( |-)?(\d+)?(?:er)?( ?)(-?)( ?)(\d+)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?( ?)(,|:){1}( ?)/i ;
+	var result = ERdate.exec(caa) ;
+	
+	function imputeMois(result, champs) {
+		//applique le résultat result au champs champs (pour les mois).
+		m = result.toLowerCase() ;	
+		for (var i = 1 ; i < lesmois.length ; i++) {
+			if (m == lesmois[i]) {
+				$(champs).value = i ;
+				return i ;
+			}
+		}
+		return false ;
+	}
+	
+	if (result) {
+		console.log(result) ;
+		if (result[1]) $('versdebut').checked = true ;		//vers
+		if (result[3]) {									//nombre : soit le quantième du mois, soit une année
+			//hypothèse 1 - une année seule
+			if (!result[9] && !result[11]) {
+				$('andebut').value 	= result[3] ;			//an début
+			}
+			else {
+				$('jourdebut').value = result[3] ;			//vers
+			}
+		}
+		if (result[5] == "-") {								//on est dans l'option 15-18 janvier
+			imputeMois(result[9], 'moisdebut') ; 
+			$('jourfin').value		= result[7] ;
+			imputeMois(result[9], 'moisfin') ; 
+			$('anfin').value = $('andebut').value ;
+		}
+		if (result[9]) imputeMois(result[9], 'moisdebut') ; //mois
+		if (result[11]) $('datedebut').value = result[11] ;	//année
+		if (result[15]) $('jourfin').value = result[15] ;	//jour de fin
+		if (result[17]) {									//mois de fin
+			imputeMois(result[17], 'moisfin') ;	
+			if (!result[19]) $('anfin').value = $('andebut').value ;
+		}
+		if (result[19]) $('anfin').value = result[19] ;		//an de fin
+	}
+	caa = caa.replace(ERdate, "") ;
+	/*var dates2 = lesEvenements.dateER2.exec(caa) ;
 	if (dates2) {
+		
 		if (dates2[1]) $('versdebut').checked = true ;			//vers
 		if (dates2[3]) {
 			//hypothèse 1 - une année seule
@@ -478,7 +530,7 @@ lesEvenements.analyse = function(e) {
 			$('anfin') .value		= dates2[15] ;	//an de fin
 		}
 		caa = caa.replace(lesEvenements.dateER2, "") ;
-	}
+	}*/
 	//remplit description si cela n'a pas été déjà fait.
 	if ($('description').value == '') {
 		var pos = $('precisions').value.indexOf(".") ;
