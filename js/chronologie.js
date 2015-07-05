@@ -294,7 +294,8 @@ var Requete = {
 		this.personneNum		= 0 ;
 		this.jour				= "" ;
 		this.mois				= "" ;
-		this.recherche 			= ""  ;
+		this.recherche 			= "" ;
+		this.evenement			= 0 ;
 		this.evenementSrc 		= 0 ;
 		this.modeIntervalle		= 0 ; 	//0 = pas d'affichage des millénaires, siècles et années. 1 = affichage des millénaires. 2 = affichage des siècles. 3 = des décennies. 4 affichage des années.
 	},
@@ -341,7 +342,7 @@ var Requete = {
 		if (typeof(this.tags) == "string")		listeTags 		= this.tags.split(",").map(function(id) { return lesTags.getByName(id.strip()).num ;}).join(",") ;
 		if (typeof(this.fonction) == "string")	listeFonctions 	= this.fonction.split(",").map(function(id) { return lesFonctions.getByName(id.strip()).num ;}).join(",") ;
 		if (typeof(this.dynastie) == "string")	listeDynasties 	= this.dynastie.split(",").map(function(id) { return lesDynasties.getByName(id.strip()).num ;}).join(",") ;
-		this.requeteURL = "rcdatedepart=" + this.datedepart + "&rcdatefin=" + this.datefin + "&rctags=" + this.tags + "&rcpersonnes=" +this.personne + "&rcrecherche=" + this.recherche + "&rcfonction=" + this.fonction + "&rcdynastie=" + this.dynastie + "&listeTags=" + listeTags + "&listeFonctions=" + listeFonctions + "&listeDynasties=" + listeDynasties ;
+		this.requeteURL = "rcdatedepart=" + this.datedepart + "&rcdatefin=" + this.datefin + "&rctags=" + this.tags + "&rcpersonnes=" +this.personne + "&evenement=" + this.evenement + "&rcrecherche=" + this.recherche + "&rcfonction=" + this.fonction + "&rcdynastie=" + this.dynastie + "&listeTags=" + listeTags + "&listeFonctions=" + listeFonctions + "&listeDynasties=" + listeDynasties ;
 		return this.requeteURL ;
 	},
 	"lienAnnee2" : function(depart, fin, evt) {
@@ -372,6 +373,19 @@ var Requete = {
 		this.evenementSrc = evt ; 
 		return donnees.requete() ;
 	}, //lienTag2
+	"lienEvt2":	function(evtpere, evt) {
+		this.datedepart = "" ;
+		this.datefin = "" ;
+		this.tags = "" ;
+		this.evenement = evtpere ;
+		this.dynastie = "" ;
+		this.fonction = "" ;
+		this.recherche = "" ;
+		this.personne = "" ;
+		this.evenementSrc = evt ; 
+		return donnees.requete() ;
+	}, //evenement
+	
 	"lienPersonne2" : function(personne, evt) {
 		var p = lesPersonnes.getById(personne) ;
 		this.datedepart = "" ;
@@ -413,7 +427,7 @@ var Requete = {
 		this.personne = "" ;
 		this.evenementSrc = evt ; 
 		this.calculeIntervalle() ;
-		return this.requete() ;
+		return donnees.requete() ;
 	},  //lienFonction
 	"lienDynastie2" : function(dynastie, evt) {
 		var d = lesDynasties.getById(dynastie) ;
@@ -430,7 +444,7 @@ var Requete = {
 		this.personne = "" ;
 		this.evenementSrc = evt ; 
 		this.calculeIntervalle() ;
-		return this.requete() ;
+		return donnees.requete() ;
 	},
 	"premiereRequete" : function() {
 		donnees.historiqueRequete.initialise() ;
@@ -761,6 +775,11 @@ var donnees = {
 	"lienTag":function(texteHTML, tag, evt) {
 		evt = evt || 0 ;
 		return '<a onClick = "Requete.lienTag2(' + tag + ', ' + evt + ')" class = "cliquable">' + texteHTML + '</a>' ;
+	},
+	
+	"lienEvt":function(texteHTML, evtpere, evt) {
+		evt = evt || 0 ;
+		return '<a onClick = "Requete.lienEvt2(' + evtpere + ', ' + evt + ')" class = "cliquable">' + texteHTML + '</a>' ;
 	},
 	
 	"lienPersonne":function(texteHTML, personne, evt) {

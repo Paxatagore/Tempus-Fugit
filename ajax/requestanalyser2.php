@@ -26,9 +26,9 @@ $condition	= "" ;	//la condition SQL à injecter
 $alea 		= 0 ;
 $e			= new evenement ;
 
-$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", $_GET) ;
+$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", $_GET) ;
 if ($n == 0) {
-	$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux") ;
+	$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux") ;
 }
 
 if ($modeVerbeux == 1) echo "Mode verbeux activé.<p></p>" ;
@@ -105,7 +105,12 @@ if ($rcrecherche != "") {
 	if ($modeVerbeux == 1) echo "<br /> Ajout de la recherche libre <p></p>" ;	
 }
 
+//évènement père
 
+if ($evenement != "") {
+	if ($modeVerbeux == 1) echo "<br /> Ajout de la recherche d'un évènement père<p></p>" ;	
+	$condition .= "(evenement.pere = $evenement OR evenement.num = $evenement) AND " ;
+}
 
 //fonction
 if ($listeFonctions != "") {
