@@ -241,6 +241,7 @@ lesEvenements.ecritUnEvenement = function(e, actif) {
 	//un père ?
 	var pere = eval(e.pere) ;
 	if (pere > 0 && (ePere = this.getById(pere))) {
+		console.log(ePere) ;
 		chaine.push('<span class="evepere cliquable">' + donnees.lienEvt(ePere.description, ePere.num, e.num) + '</span>') ;	//affichage de l'évènement père, avec un lien
 		
 		//' + lienStructure(ePere.description, "evenement", ePere.num, e.num) 

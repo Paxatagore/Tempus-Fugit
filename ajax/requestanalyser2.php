@@ -107,7 +107,7 @@ if ($rcrecherche != "") {
 
 //évènement père
 
-if ($evenement != "") {
+if ($evenement > 0) {
 	if ($modeVerbeux == 1) echo "<br /> Ajout de la recherche d'un évènement père<p></p>" ;	
 	$condition .= "(evenement.pere = $evenement OR evenement.num = $evenement) AND " ;
 }

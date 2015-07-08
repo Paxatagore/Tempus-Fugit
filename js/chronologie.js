@@ -355,6 +355,7 @@ var Requete = {
 			this.recherche = "" ;
 			this.personne = "" ;
 		}
+		this.evenement			= 0 ;
 		this.evenementSrc = evt ; 
 		if (this.datefin == this.datedepart) this.datedepart = 0 ;
 		return donnees.requete() ;
@@ -370,6 +371,7 @@ var Requete = {
 		this.fonction = "" ;
 		this.recherche = "" ;
 		this.personne = "" ;
+		this.evenement			= 0 ;
 		this.evenementSrc = evt ; 
 		return donnees.requete() ;
 	}, //lienTag2
@@ -397,6 +399,7 @@ var Requete = {
 		this.personneNom 		= "" ;
 		this.personneNum		= 0 ;
 		this.personne = personne ;
+		this.evenement			= 0 ;
 		this.evenementSrc = evt ; 
 		return donnees.requete() ;
 	}, //lienPersonne2
@@ -408,6 +411,7 @@ var Requete = {
 		this.fonction = "" ;
 		this.recherche = "" ;
 		this.personne = "alea" ;
+		this.evenement			= 0 ;
 		this.evenementSrc = null ; 
 		this.intervalles = 0 ;
 		return donnees.requete() ;
@@ -425,6 +429,7 @@ var Requete = {
 		this.fonction = f.nom ;
 		this.recherche = "" ;
 		this.personne = "" ;
+		this.evenement			= 0 ;
 		this.evenementSrc = evt ; 
 		this.calculeIntervalle() ;
 		return donnees.requete() ;
@@ -442,6 +447,7 @@ var Requete = {
 		this.fonction = "" ;
 		this.recherche = "" ;
 		this.personne = "" ;
+		this.evenement			= 0 ;
 		this.evenementSrc = evt ; 
 		this.calculeIntervalle() ;
 		return donnees.requete() ;
@@ -479,6 +485,7 @@ var Requete = {
 		this.personne	= $('rcpersonnes').value ; 
 		this.tags		= $('rctags').value ;
 		this.recherche	= $('rcrecherche').value ;
+		this.evenement	= 0 ;
 		this.evenementSrc = 0 ;
 		this.calculeIntervalle() ;
 		return donnees.requete() ;
