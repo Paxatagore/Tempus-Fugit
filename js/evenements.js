@@ -470,7 +470,7 @@ lesEvenements.analyse = function(e) {
 			$('anfin').value = $('andebut').value ;
 		}
 		if (result[9]) imputeMois(result[9], 'moisdebut') ; //mois
-		if (result[11]) $('datedebut').value = result[11] ;	//année
+		if (result[11]) $('andebut').value = result[11] ;	//année
 		if (result[15]) $('jourfin').value = result[15] ;	//jour de fin
 		if (result[17]) {									//mois de fin
 			imputeMois(result[17], 'moisfin') ;	
