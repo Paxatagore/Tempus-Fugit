@@ -64,6 +64,10 @@ class mysqldb
 		}*/
 	}
 	
+	public static function fetchall() {
+		return mysqldb::$req->fetchAll() ;
+	}
+	
 	public static function getline($table, $num) {
 		$query = "SELECT * FROM "."$table WHERE num = $num";
 		$query = mysqldb::send($query) ;
