@@ -25,6 +25,24 @@ ListeScripts = [{
 		"Out":0
 	},
 	{
+		"Nom" : "Ajout des parents à la naissance",
+		"Script" : "parents-naissance",
+		"Description" : "Ajout des parents sur les événéments naissance",
+		"Out":0
+	},
+	{
+		"Nom" : "Ajout des tags à la naissance",
+		"Script" : "tags-naissance",
+		"Description" : "Ajout des tags sur les événéments naissance",
+		"Out":0
+	},
+	{
+		"Nom" : "Ajout des tags à la mort",
+		"Script" : "tags-mort",
+		"Description" : "Ajout des tags sur les événéments de mort",
+		"Out":0
+	},
+	{
 		"Nom" : "Fusion automatique des doublons",
 		"Script" : "doublons",
 		"Description" : "Script qui fusionne les homonymes",
@@ -40,6 +58,18 @@ ListeScripts = [{
 		"Nom":"Tue les personnes vides",
 		"Script":"tuePersonnesVides",
 		"Description":"Script qui supprime les personnes vides",
+		"Out":0
+	},
+	{
+		"Nom":"Détruit les doublons dans les liens",
+		"Script":"detruit-doublons-liens",
+		"Description":"Script qui supprime les doublons dans les liens",
+		"Out":0
+	},
+	{
+		"Nom":"Détruit les liens morts",
+		"Script":"nettoie-liens",
+		"Description":"Script qui supprime les liens qui pointe vers des éléments qui n'existent plus",
 		"Out":0
 	},
 	{

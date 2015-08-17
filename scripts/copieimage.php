@@ -64,8 +64,6 @@ while($e->next()) {
 		$e->url = $destination ; 
 		$e->save();
 	}
-
-		
 }
 
 $p = new personne() ;
