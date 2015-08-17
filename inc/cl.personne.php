@@ -501,20 +501,24 @@ class personne extends alpha {
 		$lienel = new lienel() ;
 		$lienel->num = 0 ;
 		$lienpl->select("where personne = $this->num") ;
+		$leslienspl = array() ;
 		while ($lienpl->next()) {
+			$leslienspl[] = $lienpl->lieu ;
+		}
+		foreach ($leslienspl as $lplnum) {
 			//1. naissance
-			$n = $lienel->count("where evenement = $this->naissance_evenementId and tag = $lienpl->lieu") ;
+			$n = $lienel->count("where evenement = $this->naissance_evenementId and tag = $lplnum") ;
 			if ($n == 0) {
 				$lienel->evenement = $this->naissance_evenementId ;
-				$lienel->tag = $lienpl->lieu ;
+				$lienel->tag = $lplnum ;
 				$lienel->num = 0 ;
 				$lienel->save() ;
 			}
 			//2. mort
-			$n = $lienel->count("where evenement = $this->mort_evenementId and tag = $lienpl->lieu") ;
+			$n = $lienel->count("where evenement = $this->mort_evenementId and tag = $lplnum") ;
 			if ($n == 0) {
 				$lienel->evenement = $this->mort_evenementId ;
-				$lienel->tag = $lienpl->lieu ;
+				$lienel->tag = $lplnum ;
 				$lienel->num = 0 ;
 				$lienel->save() ;
 			}
