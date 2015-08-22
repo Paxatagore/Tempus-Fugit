@@ -153,6 +153,7 @@ function coreObjet (nom) {
 				if (this.donnees[i].nom.toLowerCase() == nom.toLowerCase()) {
 					return this.donnees[i] ;
 				}
+			}
 		}
 		return false ;
 	} ;
