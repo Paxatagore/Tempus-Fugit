@@ -148,10 +148,11 @@ function coreObjet (nom) {
 	
 	/*Fonctions get by name */
 	this.getByName = function(nom) {
-		for (var i = 0 ; i < this.donnees.length ; i++) {
-			if (this.donnees[i].nom.toLowerCase() == nom.toLowerCase()) {
-				return this.donnees[i] ;
-			}
+		if (this.donnees.length) {
+			for (var i = 0 ; i < this.donnees.length ; i++) {
+				if (this.donnees[i].nom.toLowerCase() == nom.toLowerCase()) {
+					return this.donnees[i] ;
+				}
 		}
 		return false ;
 	} ;
