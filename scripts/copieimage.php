@@ -24,8 +24,8 @@ function copie($origine, $destination) {
 		echo "<p></p>Fichier : ".$origine."</br>" ;
 		if(!@copy($origine, $destination)) {
 			$errors = error_get_last() ;
-			echo "COPY ERROR: ".$errors['type'] ;
-			echo "<br />\n".$errors['message'] ;
+			//echo "COPY ERROR: ".$errors['type'] ;
+			//echo "<br />\n".$errors['message'] ;
 			return 0 ;	//erreur
 		} 
 		else {
@@ -36,6 +36,42 @@ function copie($origine, $destination) {
 	return -1 ;	//le fichier existe déjà
 }
 
+function travaille ($table, $o, $schemaimage, $champ = "url") {
+	echo "Travail sur les objets de type $table <br/>" ;
+	$q = "SELECT num, ".$champ." FROM ".$table." WHERE ".$champ." NOT LIKE '%../".$schemaimage."_%'AND ".$champ." <> ''" ;
+	mysqldb::send($q) ;
+	$liste = mysqldb::fetchall() ;
+	foreach ($liste as $row) {	
+		$num = $row["num"] ;
+		$url = $row[$champ] ; 
+		//a - on prend l'extension du fichier
+		$extension = extension($url) ; 
+		//b - copie du fichier
+		$destination = "../".$schemaimage."_".$num.$extension ;
+		$n = copie($url, $destination) ;
+		if ($n == 1|| $n == -1) {
+			$o->get($num) ;
+			$o->$champ = $destination ; 
+			$o->save();
+		}
+		echo "Objet : $num - Fichier : $destination - Résultat : $n <br/>" ;
+	}
+}
+
+$d = new dynastie ;
+travaille("dynastie", $d, "img_dynasties/dynastie", "armoirie") ;
+
+$e = new evenement ;
+travaille("evenement", $e, "img_evt/evt") ;
+
+$p = new personne() ;
+travaille("personne", $p, "img_personnes/personne") ;
+
+$t = new tag ;
+travaille("tag", $t, "img_tags/drapeau", "drapeau") ;
+
+
+/*
 $d	= new dynastie() ;
 $d->select("WHERE armoirie <> ''") ;
 while($d->next()) {
@@ -66,21 +102,27 @@ while($e->next()) {
 	}
 }
 
+
+
+
 $p = new personne() ;
-$p->select("WHERE url <> ''") ;
-while($p->next()) {
-	//echo "Personne : $p->nom <br/>" ;
+$q = "SELECT num, url FROM personne WHERE url NOT LIKE '%../img_personnes/personne_%'AND url <> ''" ;
+mysqldb::send($q) ;
+$liste = mysqldb::fetchall() ;
+foreach ($liste as $row) {	
+	$pnum = $row["num"] ;
+	$url = $row["url"] ; 
 	//a - on prend l'extension du fichier
-	$extension = extension($p->url) ; 
+	$extension = extension($url) ; 
 	//b - copie du fichier
-	$destination = "../img_personnes/personne_".$p->num.$extension ;
-	$n = copie($p->url, $destination) ;
-	if ($n == 1) {
+	$destination = "../img_personnes/personne_".$pnum.$extension ;
+	$n = copie($url, $destination) ;
+	if ($n == 1|| $n == -1) {
+		$p->get($pnum) ;
 		$p->url = $destination ; 
 		$p->save();
 	}
-	$p->url = $destination ; 
-	$p->save();
+	echo "Personne : $pnum - Fichier : $destination - Résultat : $n <br/>" ;
 }
 
 $t = new tag() ;
@@ -91,13 +133,11 @@ while($t->next()) {
 	//b - copie du fichier
 	$destination = "../img_tags/drapeau_".$t->num.$extension ;
 	$n = copie($t->drapeau, $destination) ;
-	if ($n == 1) {
+	if ($n == 1|| $n == -1) {
 		$t->drapeau = $destination ; 
 		$t->save();
 	}
-	$t->drapeau = $destination ; 
-	$t->save();
-}
+}*/
 
 echo "<br/>Le script a bien été exécuté.<br/>" ;
 ?>
