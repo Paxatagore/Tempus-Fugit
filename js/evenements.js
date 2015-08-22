@@ -298,12 +298,14 @@ lesEvenements.modifie = function(oJson) {
 					lesEvenements.corrigeLienEP(oJson) ;
 					lesEvenements.ecrit() ;
 					lesEvenements.rendVisible() ;
+					console.log("Je scrolle sur " + oJson.num) ;
 					$('evenement' + oJson.num).scrollTo() ;
 				}
 			})
 		}
 	}) ;
-	if (e = this.getId(oJson.num)) {
+	e = this.getId(oJson.num) ;
+	if (e > -1) {
 		this.donnees[e] = oJson ;
 	}
 	else {
