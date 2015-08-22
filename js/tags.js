@@ -8,10 +8,11 @@ lesTags.corrigeUne = function(t) {
 		if (t.nom.length > 4) {
 			var s		= "" ;
 			if (t.autreNom != "") {
-				//il y a un nom mais aussi d'autres noms
-				s		= "|" + t.autreNom.split(",").map(function(c, i) {return c.strip() ;}).join("|") ;		//les autres noms sont susceptibles d'être divisés par des ,
+				//il y a aussi d'autres noms. On concocte un listing sous forme nom|autrenom1|autrenom2
+				s = "|" + t.autreNom.split(",").map(function(c, i) {return c.strip() ;}).join("|") ;		//les autres noms sont susceptibles d'être divisés par des ,
 			}
 			t.regExp1	= new RegExp("(\\s|\\.|,|'|\\(){1}" + "(" + t.nom + s + ")(\\s|\\.|,|\\)){1}", 'i') ;
+			t.regExp4	= new RegExp("^" + "(" + t.nom + s + ")( |:)", "") ;		//recherche en début de mot. Du coups, les majuscules comptent et le mot doit être suivi d'un espace ou d'un :
 			if (t.adjectifs != "") {
 				s = t.adjectifs.split(",").map(function(c, i) {return c.strip() ;}).join("|") ;
 				t.regExp2	= new RegExp("(" + s + ")(e|es|s)?", 'i') ;

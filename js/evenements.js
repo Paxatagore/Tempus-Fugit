@@ -549,9 +549,10 @@ lesEvenements.analyse = function(e) {
 	if (t) $('precisions').value = $('precisions').value.replace(t[1], '') ;
 	//Analyse des tags
 	lesTags.each(function(t) {
+		//on teste que ce tag ne fait pas déjà parti de la liste des tags suggérés
 		if (e && e.tagsSuggeres.indexOf(t.num) < 0) { 
-			//on teste que ce tag ne fait pas déjà parti de la liste des tags suggérés
-			if (((t.regExp1 && t.regExp1.test(caa)) || (t.regExp2 && t.regExp2.test(caa)) || (t.regExp3 && t.regExp3.test(caa))) && (e.lienETsimple.indexOf(t.num)  < 0)) {
+			console.log("Test du tag " + t.nom) ;
+			if (((t.regExp1 && t.regExp1.test(caa)) || (t.regExp2 && t.regExp2.test(caa)) || (t.regExp3 && t.regExp3.test(caa)) || (t.regExp4 && t.regExp4.test(caa))) && (e.lienETsimple.indexOf(t.num)  < 0)) {
 				if ($('tagssuggeres').value == '')	$('tagssuggeres').value = t.nom ;
 				else $('tagssuggeres').value += ', ' + t.nom ;
 				$('tagss').innerHTML += '<span id="ts' + t.num + '"><span class="sugItem">' + t.nom + '</span> <img class="tagPetiteImage" src="../img/b_drop.png" onclick="lesEvenements.supprimeSug(' + t.num + ', 0)" title="Supprimer cette suggestion"></span> ' ;
@@ -569,6 +570,10 @@ lesEvenements.analyse = function(e) {
 		}
 	}) ;
 	//analyseur de mots clés
+	if (/guerre /i.test(caa)) {
+		$('typeeve4').checked = true ;			//radio : guerre
+		$('thematiques2').checked = true ;		//case thématique militaire
+	}
 	if (/traité |pacte |paix entre /i.test(caa)) {
 		$('typeeve6').checked = true ;		//radio traité
 		$('thematiques7').checked = true ;	//case thématique
@@ -576,10 +581,6 @@ lesEvenements.analyse = function(e) {
 	if (/(élection|election|législatives|élu )/i.test(caa) || /référendum/i.test(caa)) {
 		$('typeeve11').checked = true ;			//radio : élection
 		$('thematiques3').checked = true ;		//case thématique politique
-	}
-	if (/guerre /i.test(caa)) {
-		$('typeeve4').checked = true ;			//radio : guerre
-		$('thematiques2').checked = true ;		//case thématique militaire
 	}
 	if (/bataille /i.test(caa)) {
 		$('typeeve2').checked = true ;			//radio : bataille
