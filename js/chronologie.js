@@ -298,9 +298,11 @@ var Requete = {
 		this.evenement			= 0 ;
 		this.evenementSrc 		= 0 ;
 		this.modeIntervalle		= 0 ; 	//0 = pas d'affichage des millénaires, siècles et années. 1 = affichage des millénaires. 2 = affichage des siècles. 3 = des décennies. 4 affichage des années.
+		this.contexteup			= 0 ;
+		this.contextedown		= 1 ;
 	},
 	"sauvegardeLocale" : function() {
-		localStorage.setItem("requete", JSON.stringify({"datedepart":this.datedepart, "datefin":this.datefin, "dynastie":this.dynastie, "fonction":this.fonction, "personne":this.personne, "tags":this.tags, "recherche":this.recherche})) ; 
+		localStorage.setItem("requete", JSON.stringify({"datedepart":this.datedepart, "datefin":this.datefin, "dynastie":this.dynastie, "fonction":this.fonction, "personne":this.personne, "tags":this.tags, "recherche":this.recherche, "contexteup":this.contexteup, "contextedown":this.contextedown})) ; 
 		return 1 ;
 	},
 	"calculeIntervalle": function() {
@@ -342,7 +344,7 @@ var Requete = {
 		if (typeof(this.tags) == "string")		listeTags 		= this.tags.split(",").map(function(id) { return lesTags.getByName(id.strip()).num ;}).join(",") ;
 		if (typeof(this.fonction) == "string")	listeFonctions 	= this.fonction.split(",").map(function(id) { return lesFonctions.getByName(id.strip()).num ;}).join(",") ;
 		if (typeof(this.dynastie) == "string")	listeDynasties 	= this.dynastie.split(",").map(function(id) { return lesDynasties.getByName(id.strip()).num ;}).join(",") ;
-		this.requeteURL = "rcdatedepart=" + this.datedepart + "&rcdatefin=" + this.datefin + "&rctags=" + this.tags + "&rcpersonnes=" +this.personne + "&evenement=" + this.evenement + "&rcrecherche=" + this.recherche + "&rcfonction=" + this.fonction + "&rcdynastie=" + this.dynastie + "&listeTags=" + listeTags + "&listeFonctions=" + listeFonctions + "&listeDynasties=" + listeDynasties ;
+		this.requeteURL = "rcdatedepart=" + this.datedepart + "&rcdatefin=" + this.datefin + "&rctags=" + this.tags + "&rcpersonnes=" +this.personne + "&evenement=" + this.evenement + "&rcrecherche=" + this.recherche + "&rcfonction=" + this.fonction + "&rcdynastie=" + this.dynastie + "&listeTags=" + listeTags + "&listeFonctions=" + listeFonctions + "&listeDynasties=" + listeDynasties + "&contexteup=" + this.contexteup + "&contextedown=" + this.contextedown ;
 		return this.requeteURL ;
 	},
 	"lienAnnee2" : function(depart, fin, evt) {
@@ -471,6 +473,8 @@ var Requete = {
 			this.vide() ;
 			this.datedepart	= cetteAnnee ;
 		} ;
+		this.contexteup	= $('rccontexteup').checked ;
+		this.contextedown = $('rccontextedown').checked ;
 		this.calculeIntervalle() ;
 		return donnees.requete() ;
 	},
@@ -485,6 +489,8 @@ var Requete = {
 		this.personne	= $('rcpersonnes').value ; 
 		this.tags		= $('rctags').value ;
 		this.recherche	= $('rcrecherche').value ;
+		this.contexteup	= $('rccontexteup').checked ;
+		this.contextedown = $('rccontextedown').checked ;
 		this.evenement	= 0 ;
 		this.evenementSrc = 0 ;
 		this.calculeIntervalle() ;

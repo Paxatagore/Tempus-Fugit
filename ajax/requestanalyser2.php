@@ -25,10 +25,13 @@ $tables		= "" ;	//les tables SQL dans lesquelles taper
 $condition	= "" ;	//la condition SQL à injecter
 $alea 		= 0 ;
 $e			= new evenement ;
+$contexteup	= 0 ;	//par défaut, on ne recherche pas le contexte ascendant
+$contextedown = 1 ;	//par défaut, on recherche le contexte descendant
 
-$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", $_GET) ;
+
+$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", "contexteup", "contextedown", $_GET) ;
 if ($n == 0) {
-	$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux") ;
+	$n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", "contexteup", "contextedown") ;
 }
 
 if ($modeVerbeux == 1) echo "Mode verbeux activé.<p></p>" ;
@@ -53,16 +56,20 @@ if ($listeTags != "") {
 	$t = new tag() ;
 	$t->select("WHERE num IN ($listeTags)") ;
 	while ($t->next()) {
-		if ($t->peres != "") {
-			$peres = explode(",", $t->peres) ;
-			foreach ($peres as $unPere) {
-				if (!in_array($unPere, $isin)) $isin[] = $unPere ;
+		if ($contexteup == true) {
+			if ($t->peres != "") {
+				$peres = explode(",", $t->peres) ;
+				foreach ($peres as $unPere) {
+					if (!in_array($unPere, $isin)) $isin[] = $unPere ;
+				}
 			}
 		}
-		if ($t->fils != "") {
-			$fils = explode(",", $t->fils) ;
-			foreach ($fils as $unFils) {
-				if (!in_array($unFils, $isin)) $isin[] = $unFils ;
+		if ($contextedown == true) {
+			if ($t->fils != "") {
+				$fils = explode(",", $t->fils) ;
+				foreach ($fils as $unFils) {
+					if (!in_array($unFils, $isin)) $isin[] = $unFils ;
+				}
 			}
 		}
 	}

@@ -62,7 +62,7 @@
 				<li><a id="chronoMode" onClick="donnees.setModeColorisation(1)">Afficher</a></li>
 				<li><a><hr></a></li>
 			</nav>
-		</li> 
+		</li>
 		<li id="menuTypes"><a>Types</a>
 			<nav class="subMenu" id="subMenuTypes" class="subMenu">
 				<li><a id="chronoMode" onClick="donnees.setModeColorisation(0)">Afficher</a></li>
@@ -89,14 +89,17 @@
 				<td><span class="requeteurComplexeLegende">Date de fin<span></td>
 				<td><span class="requeteurComplexeLegende">Tags<span></td>
 				<td><span class="requeteurComplexeLegende">Personnes<span></td>
+				<td><span class="requeteurComplexeLegende">Contexte<span></td>
 			</tr>
 			<tr>
 				<td><input type="text" id="rcdatedepart" value="" name="rcdatedepart" class="petitF" /></td>
 				<td><input type="text" id="rcdatefin" value="" name="rcdatefin" class="petitF" /></td>
 				<td><input type="text" id="rctags" value="" name="rctags" class="normalF" /><div class="autocomplete" id="upd_rctags"></div></td>
 				<td><input type="text" id="rcpersonnes" value="" name="rcpersonnes" class="normalF" /><div class="autocomplete" id="upd_rcpersonnes"></div></td>
-				<td><input type="reset" value="Vider" title="Vider" id="resetForm" class="requeteurComplexeBoutton"></td>
-				<td><input type="button" value="Personne aléatoire" title="Personne aléatoire" id="persAlea2" class="requeteurComplexeBoutton"></td>
+				<td colspan="2">
+					<input type="checkbox" id="rccontexteup" value="contexteup" name="rccontexteup">ascendant
+					<input type="checkbox" id="rccontextedown" value="contextedown" checked name="rccontextedown">descendant
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"><span class="requeteurComplexeLegende">Recherche<span></td>
@@ -108,6 +111,8 @@
 				<td><input type="text" id="rcfonction" value="" name="rcfonction" class="normalF" /><div class="autocomplete" id="upd_rcfonction"></div></td>
 				<td><input type="text" id="rcdynastie" value="" name="rcdynastie" class="normalF" /><div class="autocomplete" id="upd_rcdynastie"></div></td>
 				<td><input type="submit" value="Envoyer la requête" title="Envoyer la requête" id="rcsubmit" class="requeteurComplexeBoutton"></td>
+				<td><input type="reset" value="Vider" title="Vider" id="resetForm" class="requeteurComplexeBoutton"></td>
+				<td><input type="button" value="Personne aléatoire" title="Personne aléatoire" id="persAlea2" class="requeteurComplexeBoutton"></td>
 			</tr>
 			</table>
 		</form>
