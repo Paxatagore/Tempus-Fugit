@@ -435,7 +435,7 @@ lesEvenements.analyse = function(e) {
 	//(15) - (18) (janvier) (1950)
 	//option au début : vers/v.
 	//à la fin : : ou ,
-	ERdate = /^(vers|v.)?( *)(\d+)?( )*(-)?( )*(\d+)?( )*(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( |-)?(\d+)?(?:er)?( ?)(-?)( ?)(\d+)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?( ?)(,|:){1}( ?)/i ;
+	ERdate = /^(vers|v.)?( *)(\d+)?(?:er)?( )*(-)?( )*(\d+)?( )*(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( |-)?(\d+)?(?:er)?( ?)(-?)( ?)(\d+)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?( ?)(,|:){1}( ?)/i ;
 	var result = ERdate.exec(caa) ;
 	
 	function imputeMois(result, champs) {
@@ -554,7 +554,6 @@ lesEvenements.analyse = function(e) {
 	lesTags.each(function(t) {
 		//on teste que ce tag ne fait pas déjà parti de la liste des tags suggérés
 		if (e && e.tagsSuggeres.indexOf(t.num) < 0) { 
-			console.log("Test du tag " + t.nom) ;
 			if (((t.regExp1 && t.regExp1.test(caa)) || (t.regExp2 && t.regExp2.test(caa)) || (t.regExp3 && t.regExp3.test(caa)) || (t.regExp4 && t.regExp4.test(caa))) && (e.lienETsimple.indexOf(t.num)  < 0)) {
 				if ($('tagssuggeres').value == '')	$('tagssuggeres').value = t.nom ;
 				else $('tagssuggeres').value += ', ' + t.nom ;
