@@ -561,6 +561,8 @@ lesEvenements.analyse = function(e) {
 				e.tagsSuggeres.push(t.num) ;
 			}
 		}
+		//recherche de la forme "à (ville)" pour nourrir le lieu
+		if (($('lieu').value == "") && (t.regExp5) && (t.regExp5.test(caa))) $('lieu').value = t.nom ;
 	});
 	//Analyse des personnes
 	lesPersonnes.each(function(p) {

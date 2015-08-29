@@ -37,6 +37,12 @@ lesTags.corrigeUne = function(t) {
 				t.regExp2	= false ;
 			}
 		}
+		if (t.nature == "1" || t.nature == 15) {
+			t.regExp5 = new RegExp("à (" + t.nom + s + ")( |,|.)") ;
+		}
+		else {
+			t.regExp5 = false ;
+		}
 	}
 	else {
 		t.regExp1 = false ;
