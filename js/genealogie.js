@@ -304,7 +304,7 @@ arbre = {
 		else {
 			var subfct = 'arbreDynastique.affichePersonne' ;
 		}
-		chaine += '<text onClick="' + subfct + '(' + p.num + ')" font-size="' + size + '" id="arbreAsc' + p.num + '" x="' + xx + '" y="' + yy + '" text-anchor="middle" textLenght = "' + ll +'" lengthAdjust="spacingAndGlyphs">' + naa + '</text>' ;
+		chaine += '<text title="un test" onClick="' + subfct + '(' + p.num + ')" font-size="' + size + '" id="arbreAsc' + p.num + '" x="' + xx + '" y="' + yy + '" text-anchor="middle" textLenght = "' + ll +'" lengthAdjust="spacingAndGlyphs">' + naa + '</text>' ;
 		//dates de naissance et de mort
 		if (p.hasOwnProperty("annaissance")) {
 			chaine += '<text onClick="' + subfct + '(' + p.num + ')" font-size="10" x="' + xx + '" y="' + yy2 + '" text-anchor="middle" textLenght = "' + ll +'" lengthAdjust="spacingAndGlyphs">' + lesPersonnes.afficheDates(p) + '</text>' ;

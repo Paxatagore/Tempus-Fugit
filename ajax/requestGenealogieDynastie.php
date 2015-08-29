@@ -85,7 +85,7 @@ $p = new personne ;
 $p->select("WHERE dynastie IN $dynasties ORDER BY annaissance") ;
 while ($p->next()) {
 	$isin .= $p->num."," ;
-	$lesPersonnes[] = array("num" => $p->num, "nom" => $p->nom, "sexe" => $p->sexe, "annaissance" => $p->annaissance, "anmort" => $p->anmort, "dynastie"=>$p->dynastie, "pere1" => 0, "pere2" => 0, "enfants" => array(), "enfantsAdoptifs" =>array(), "enfantsIllegitimes" => array(), "fonctions"=>array(), "url" => $p->url, "Range" => 0, "epoux" => array()) ;
+	$lesPersonnes[] = array("num" => $p->num, "nom" => $p->nom, "sexe" => $p->sexe, "annaissance" => $p->annaissance, "anmort" => $p->anmort, "dynastie"=>$p->dynastie, "pere1" => 0, "pere2" => 0, "enfants" => array(), "enfantsAdoptifs" =>array(), "enfantsIllegitimes" => array(), "fonctions"=>array(), "url" => $p->url, "Range" => 0, "epoux" => array(), "notice" => $p->notice) ;
 	$lesPersonnesSimple[] = $p->num ;
 	if ($p->sexe == "f") $isinF .= $p->num."," ;
 }
