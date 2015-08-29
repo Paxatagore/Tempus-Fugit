@@ -304,7 +304,10 @@ lesEvenements.modifie = function(oJson) {
 			})
 		}
 	}) ;
-	if ((this.donnees[0].num == oJson.num) || (e = this.getId(oJson.num))) {
+	if (this.donnees[0].num == oJson.num) {
+		this.donnees[0] = oJson ;
+	}
+	else if (e = this.getId(oJson.num)) {
 		this.donnees[e] = oJson ;
 	}
 	else {
