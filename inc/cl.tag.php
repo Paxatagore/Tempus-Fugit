@@ -151,8 +151,8 @@ class tag extends alpha
 		$first = str_ireplace("ï", "_", $first) ;		
 		$first = str_ireplace("î", "_", $first) ;
 		$first = str_ireplace("ü", "_", $first) ;
-		$first = str_ireplace("ô", "_", $first) ;		
-		$first = str_ireplace("-", "_", $first) ;*/
+		$first = str_ireplace("ô", "_", $first) ;		*/
+		$first = str_ireplace("-", "_", $first) ;
 		
 		//echo $first ;
 		$first = stripslashes($first) ;

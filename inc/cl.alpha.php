@@ -43,7 +43,8 @@ abstract class alpha {
 	public function autocomplete($field='nom', $first='') {
 		//recherche par défaut pour un champ autocomplete
 		//$first = str_ireplace("é", "_", $first) ;
-		//$first = str_ireplace("è", "_", $first) ;
+		$first = str_ireplace("-", "_", $first) ;
+		$first = str_ireplace(" ", "_", $first) ;
 		$lq = strlen($first) ;
 		$this->select('where '.$field.' like "'.$first.'%" order by occurence DESC, '.$field.' limit 0,20') ;
 		$string = "" ;
