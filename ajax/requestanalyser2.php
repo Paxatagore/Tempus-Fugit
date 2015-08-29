@@ -26,7 +26,7 @@ $condition	= "" ;	//la condition SQL à injecter
 $alea 		= 0 ;
 $e			= new evenement ;
 $contexteup	= 0 ;	//par défaut, on ne recherche pas le contexte ascendant
-$contextedown = 1 ;	//par défaut, on recherche le contexte descendant
+$contextedown = true ;	//par défaut, on recherche le contexte descendant
 
 
 $n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", "contexteup", "contextedown", $_GET) ;
@@ -56,7 +56,9 @@ if ($listeTags != "") {
 	$t = new tag() ;
 	$t->select("WHERE num IN ($listeTags)") ;
 	while ($t->next()) {
-		if ($contexteup == true) {
+		//print_r($isin) ;
+		//echo $contexteup ;
+		if ($contexteup === true) {
 			if ($t->peres != "") {
 				$peres = explode(",", $t->peres) ;
 				foreach ($peres as $unPere) {
@@ -64,6 +66,8 @@ if ($listeTags != "") {
 				}
 			}
 		}
+		//print_r($isin) ;
+		//echo $contextedown ;
 		if ($contextedown == true) {
 			if ($t->fils != "") {
 				$fils = explode(",", $t->fils) ;
@@ -72,6 +76,7 @@ if ($listeTags != "") {
 				}
 			}
 		}
+		//print_r($isin) ;
 	}
 	$isinTxt = implode(",", $isin) ;
 	$condition .= "((lienel.tag IN ($isinTxt)) AND (evenement.num = lienel.evenement)) AND " ;
@@ -301,13 +306,13 @@ if ($nev > 0) {		//on a au moins un évènement
 	if ($modeVerbeux == 1) afficheTableauPersonnes() ;
 	//5. Ajout des évènements à la chaine JSON
 	//6. Ajout des personnes à la chaine JSON
-	$json = '{"nevcontexte" : "'.$nevcontexte.'", "evenements" : '.json_encode($lesEvenements).', "personnes": '.json_encode($lesPersonnes) ;
+	$json = '{"nevcontexte" : "'.$nevcontexte.'", "q":"'.$q.'", "contexteup":"'.$contexteup.'", "contextedown":"'.$contextedown.'", "evenements" : '.json_encode($lesEvenements).', "personnes": '.json_encode($lesPersonnes) ;
 }
 else {
 	if ($rcpersonnes != "" && $p->num > 0) {
-		$json = '{"nev":0, "evenements" : [], "personnes": ['.$p->json().']' ;
+		$json = '{"nev":0, "q":'.$q.', "evenements" : [], "personnes": ['.$p->json().']' ;
 	}
-	else $json = '{"nev":0, "evenements" : [], "personnes": []' ;
+	else $json = '{"nev":0, "q":'.$q.', "evenements" : [], "personnes": []' ;
 	
 }
 if ($alea == 1) $json .= ', "personneAlea":'.$jsonpersonnealea ;
