@@ -576,6 +576,19 @@ lesEvenements.analyse = function(e) {
 			e.personnesSuggerees.push(p.num) ;
 		}
 	}) ;
+	//analyse d'événément père
+	perespotentiels.each(function(p) {
+		if (p.regExp.test(caa)) {
+			console.log("Match avec un père potentiel " + p.cle) ;
+			var contenu = [] ;
+			for (var i = 0 ; i < perespotentiels.length ; i++) {
+				if (p.cle == perespotentiels[i].cle) contenu.push('<option selected value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
+				else contenu.push('<option value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
+			}
+			$('pere').innerHTML = contenu.join("") ;
+		}
+	}) ;
+			
 	//analyseur de mots clés
 	if (/guerre /i.test(caa)) {
 		$('typeeve4').checked = true ;			//radio : guerre
@@ -683,11 +696,13 @@ function triReverse() {
 	rep = ter.responseText.evalJSON().evenements ;
 	perespotentiels = new Array() ;
 	for (var i = 0 ; i < rep.length ; i++) {
+		var n = rep[i].description.slice(0,-1)
+		r = new RegExp(n, "i") ;
 		if (rep[i].anfin != 0 && rep[i].anfin != rep[i].andebut) {
-			perespotentiels.push({"cle" :rep[i].num, "valeur" : rep[i].description.slice(0,50) + " (" + rep[i].andebut + " - " + rep[i].anfin + ")"}) ;
+			perespotentiels.push({"cle" :rep[i].num, "regExp":r, "valeur" : n.slice(0,50) + " (" + rep[i].andebut + " - " + rep[i].anfin + ")"}) ;
 		}
 		else {
-			perespotentiels.push({"cle" :rep[i].num, "valeur" : rep[i].description.slice(0,50) + " (" + rep[i].andebut + ")"}) ;
+			perespotentiels.push({"cle" :rep[i].num, "regExp":r, "valeur" : n.slice(0,50) + " (" + rep[i].andebut + ")"}) ;
 		}
 	}
 	return perespotentiels ;

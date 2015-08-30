@@ -264,8 +264,9 @@ unFormulaire.prototype = {
 		tableau = tableau || [] ;
 		//le tableau est complexe quand chacune de ses valeurs est un couple clé / valeur.
 		selection = this.testeValeur(champ, selection) || 0 ;
-		contenu = '<select class="inputOrdinaire" name="' + champ + '" ' + this.tabInd() + '><option value="0"></option>' ;
-		for (var i = 0 ; i < tableau.length ; i++) {
+		return '<select class="inputOrdinaire" id="' + champ + '" name="' + champ + '" ' + this.tabInd() + '><option value="0"></option>' + this.rempliOptionsComplexes(tableau, selection) + '</select>'  ;
+		//contenu = '<select class="inputOrdinaire" id="' + champ + '" name="' + champ + '" ' + this.tabInd() + '><option value="0"></option>' + this.rempliOptionsComplexes(tableau, selection) + '</select>'  ;
+		/*for (var i = 0 ; i < tableau.length ; i++) {
 			if (selection == tableau[i].cle) {
 				contenu += '<option selected value="' + tableau[i].cle + '">' + tableau[i].valeur + '</option>' ;
 			}
@@ -274,8 +275,17 @@ unFormulaire.prototype = {
 			}
 		}
 		contenu += '</select>' ;
-		return contenu ;
-	},	
+		return contenu ;*/
+	},
+	
+	rempliOptionsComplexes(tableau, selection) {
+		var contenu = [] ;
+		for (var i = 0 ; i < tableau.length ; i++) {
+			if (selection == tableau[i].cle) contenu.push('<option selected value="' + tableau[i].cle + '">' + tableau[i].valeur + '</option>') ;
+			else contenu.push('<option value="' + tableau[i].cle + '">' + tableau[i].valeur + '</option>') ;
+		}
+		return contenu.join("") ;
+	},
 
 	//Cases à cocher
 	checkbox : function (champ, tableau) {
