@@ -420,6 +420,8 @@ lesEvenements.form = function(x, option) {
 } ;
 
 lesEvenements.dateER2			= /^(vers|v.)?( ?)(\d+)?(?:er)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?(?:er)?( ?)(-?)( ?)(\d+)?( ?)(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|hiver|printemps|été|automne|décennie|siècle)?( ?)(\d+)?( ?)(,|:){1}( ?)/i ;			//pattern susceptible de trouver deux années entières positives uniquement
+lesEvenements.consulsRomains	= /\(\d+ (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)( \d?)? du calendrier romain\) /i
+lesEvenements.calendrierJulien	= /\(\d+ (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)( \d?)? du calendrier julien\) /i
 
 lesEvenements.analyse = function(e) {
 	//Fonction d'analyse du contenu de l'évènement dans le formulaire
@@ -543,6 +545,7 @@ lesEvenements.analyse = function(e) {
 	}
 	$('description').value = $('description').value.trim() ;
 	$('description').value = $('description').value.replace(lesEvenements.dateER2, "").replace(lesEvenements.consulsRomains, "").replace("(en)", "") ; 
+	$('description').value = $('description').value.replace(lesEvenements.dateER2, "").replace(lesEvenements.calendrierJulien, "").replace("(en)", "") ; 
 	$('description').value = $('description').value.trim() ;
 	var t = lesEvenements.notesER.exec($('description').value) ;
 	if (t) $('description').value = $('description').value.replace(t[1], '') ;
