@@ -26,7 +26,7 @@ $condition	= "" ;	//la condition SQL à injecter
 $alea 		= 0 ;
 $e			= new evenement ;
 $contexteup	= 0 ;	//par défaut, on ne recherche pas le contexte ascendant
-$contextedown = true ;	//par défaut, on recherche le contexte descendant
+$contextedown = 1 ;	//par défaut, on recherche le contexte descendant
 
 
 $n = extraction("rctags", "rcpersonnes", "rcdynastie", "rcfonction", "rcdatedepart", "rcdatefin", "rcrecherche", "rcfonction", "evenement", "listeTags", "listeFonctions", "listeDynasties", "modeVerbeux", "contexteup", "contextedown", $_GET) ;
@@ -58,7 +58,7 @@ if ($listeTags != "") {
 	while ($t->next()) {
 		//print_r($isin) ;
 		//echo $contexteup ;
-		if ($contexteup === true) {
+		if ($contexteup == 1) {
 			if ($t->peres != "") {
 				$peres = explode(",", $t->peres) ;
 				foreach ($peres as $unPere) {
@@ -68,7 +68,7 @@ if ($listeTags != "") {
 		}
 		//print_r($isin) ;
 		//echo $contextedown ;
-		if ($contextedown == true) {
+		if ($contextedown == 1) {
 			if ($t->fils != "") {
 				$fils = explode(",", $t->fils) ;
 				foreach ($fils as $unFils) {
