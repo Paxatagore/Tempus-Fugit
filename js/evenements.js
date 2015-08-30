@@ -576,10 +576,11 @@ lesEvenements.analyse = function(e) {
 			e.personnesSuggerees.push(p.num) ;
 		}
 	}) ;
-	//analyse d'événément père
-	perespotentiels.each(function(p) {
+	//recherche d'événément père potentiel
+	/*perespotentiels.each(function(p) {
+		//on en a trouvé un
 		if (p.regExp.test(caa)) {
-			console.log("Match avec un père potentiel " + p.cle) ;
+			//on modifie le contenu du <SELECT>
 			var contenu = [] ;
 			for (var i = 0 ; i < perespotentiels.length ; i++) {
 				if (p.cle == perespotentiels[i].cle) contenu.push('<option selected value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
@@ -587,7 +588,17 @@ lesEvenements.analyse = function(e) {
 			}
 			$('pere').innerHTML = contenu.join("") ;
 		}
-	}) ;
+	}) ;*/
+	
+	p = perespotentiels.detect(function(p) { return p.regExp.test(caa) }) ;
+	if (p.cle > 0) {
+		var contenu = [] ;
+		for (var i = 0 ; i < perespotentiels.length ; i++) {
+			if (p.cle == perespotentiels[i].cle) contenu.push('<option selected value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
+			else contenu.push('<option value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
+		}
+		$('pere').innerHTML = contenu.join("") ;
+	}
 			
 	//analyseur de mots clés
 	if (/guerre /i.test(caa)) {
