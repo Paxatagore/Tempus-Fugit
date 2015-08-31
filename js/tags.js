@@ -11,7 +11,7 @@ lesTags.corrigeUne = function(t) {
 				//il y a aussi d'autres noms. On concocte un listing sous forme nom|autrenom1|autrenom2
 				s = "|" + t.autreNom.split(",").map(function(c, i) {return c.strip() ;}).join("|") ;		//les autres noms sont susceptibles d'être divisés par des ,
 			}
-			t.regExp1	= new RegExp("(\\s|\\.|,|'|\\(){1}" + "(" + t.nom + s + ")(\\s|\\.|,|\\)){1}", 'i') ;
+			t.regExp1	= new RegExp("(\\s|\\.|,|'|’|\\(){1}" + "(" + t.nom + s + ")(\\s|\\.|,|\\)){1}", 'i') ;
 			t.regExp4	= new RegExp("^" + "(" + t.nom + s + ")( |:)", "") ;		//recherche en début de mot. Du coups, les majuscules comptent et le mot doit être suivi d'un espace ou d'un :
 			if (t.adjectifs != "") {
 				s = t.adjectifs.split(",").map(function(c, i) {return c.strip() ;}).join("|") ;
@@ -39,6 +39,7 @@ lesTags.corrigeUne = function(t) {
 		}
 		if (t.nature == "1" || t.nature == 15) {
 			t.regExp5 = new RegExp("à (" + t.nom + s + ")( |,|.)") ;
+			t.regExp6 = new RegExp("(traité|siège) de (" + t.nom + s + ")( |,|.)") ;
 		}
 		else {
 			t.regExp5 = false ;

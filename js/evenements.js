@@ -461,7 +461,7 @@ lesEvenements.analyse = function(e) {
 				$('andebut').value 	= result[3] ;			//an début
 			}
 			else {
-				$('jourdebut').value = result[3] ;			//vers
+				$('jourdebut').value = result[3] ;			//jours début
 			}
 		}
 		if (result[5] == "-") {								//on est dans l'option 15-18 janvier
@@ -471,11 +471,19 @@ lesEvenements.analyse = function(e) {
 			$('anfin').value = $('andebut').value ;
 		}
 		if (result[9]) imputeMois(result[9], 'moisdebut') ; //mois
-		if (result[11]) $('andebut').value = result[11] ;	//année
-		if (result[15]) $('jourfin').value = result[15] ;	//jour de fin
-		if (result[17]) {									//mois de fin
+		if (result[10] == "-") {
+			//on a une forme du type 1er janvier - 4 avril
+			$('jourfin').value = result[11] ;
 			imputeMois(result[17], 'moisfin') ;	
 			if (!result[19]) $('anfin').value = $('andebut').value ;
+		}
+		else {		
+			if (result[11]) $('andebut').value = result[11] ;	//année
+			if (result[15]) $('jourfin').value = result[15] ;	//jour de fin
+			if (result[17]) {									//mois de fin
+				imputeMois(result[17], 'moisfin') ;	
+				if (!result[19]) $('anfin').value = $('andebut').value ;
+			}
 		}
 		if (result[19]) $('anfin').value = result[19] ;		//an de fin
 	}
@@ -566,6 +574,8 @@ lesEvenements.analyse = function(e) {
 		}
 		//recherche de la forme "à (ville)" pour nourrir le lieu
 		if (($('lieu').value == "") && (t.regExp5) && (t.regExp5.test(caa))) $('lieu').value = t.nom ;
+		//recherche de la forme "siège de (ville)" ou "traité de (ville)"
+		if ((t.regExp6) && (t.regExp6.test(caa))) $('lieu').value = t.nom ;
 	});
 	//Analyse des personnes
 	lesPersonnes.each(function(p) {
@@ -577,21 +587,8 @@ lesEvenements.analyse = function(e) {
 		}
 	}) ;
 	//recherche d'événément père potentiel
-	/*perespotentiels.each(function(p) {
-		//on en a trouvé un
-		if (p.regExp.test(caa)) {
-			//on modifie le contenu du <SELECT>
-			var contenu = [] ;
-			for (var i = 0 ; i < perespotentiels.length ; i++) {
-				if (p.cle == perespotentiels[i].cle) contenu.push('<option selected value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
-				else contenu.push('<option value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
-			}
-			$('pere').innerHTML = contenu.join("") ;
-		}
-	}) ;*/
-	
 	p = perespotentiels.detect(function(p) { return p.regExp.test(caa) }) ;
-	if (p.cle > 0) {
+	if (p) {
 		var contenu = [] ;
 		for (var i = 0 ; i < perespotentiels.length ; i++) {
 			if (p.cle == perespotentiels[i].cle) contenu.push('<option selected value="' + perespotentiels[i].cle + '">' + perespotentiels[i].valeur + '</option>') ;
