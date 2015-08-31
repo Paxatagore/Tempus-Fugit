@@ -310,9 +310,9 @@ if ($nev > 0) {		//on a au moins un évènement
 }
 else {
 	if ($rcpersonnes != "" && $p->num > 0) {
-		$json = '{"nev":0, "q":'.$q.', "evenements" : [], "personnes": ['.$p->json().']' ;
+		$json = '{"nev":0, "q":"'.$q.'", "evenements" : [], "personnes": ['.$p->json().']' ;
 	}
-	else $json = '{"nev":0, "q":'.$q.', "evenements" : [], "personnes": []' ;
+	else $json = '{"nev":0, "q":"'.$q.'", "evenements" : [], "personnes": []' ;
 	
 }
 if ($alea == 1) $json .= ', "personneAlea":'.$jsonpersonnealea ;
