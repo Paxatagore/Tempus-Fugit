@@ -58,7 +58,7 @@ foreach ($personnes as $pnom) {
 	
 	//4e étape - fusion des autres noms
 	if (count($autreNoms2) > 0) {
-		$autreNom .= ",".joint(autreNoms2, ",") ;
+		$autreNom .= ",".join(autreNoms2, ",") ;
 	}
 	
 	//5e étape - fusion des dynasties
