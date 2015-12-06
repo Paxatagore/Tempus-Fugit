@@ -224,7 +224,8 @@ lesPersonnes.ecritUne = function(p, affiche) {
 	if (p.dynastieNom != "") chaine.push('<div class="unePetiteInfo"><span class="uneCaseGras">Dynastie</span> : <span class="cliquable" onClick="arbreDynastique.requete([' + p.dynastie+ '])">' + p.dynastieNom + '</span></div>') ;
 	//affichage des fonctions
 	p.lpf.each(function(lpf) {
-		chaine.push('<div class="unePetiteInfo"><span class="uneCaseGras">' + lpf.fonctionNom + '</span> : ' + lpf.andebut + ' - ' + lpf.anfin + '</div>') ;
+		if (lpf.anfin > cetteAnnee) chaine.push('<div class="unePetiteInfo"><span class="uneCaseGras">' + lpf.fonctionNom + '</span> : depuis ' + lpf.andebut + '</div>') ;
+		else chaine.push('<div class="unePetiteInfo"><span class="uneCaseGras">' + lpf.fonctionNom + '</span> : ' + lpf.andebut + ' - ' + lpf.anfin + '</div>') ;
 	}) ;
 	//affichage des liens pp
 	chaine.push('<div id="leslienspp' + p.num + '" class="unePetiteInfo">') ;

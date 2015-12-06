@@ -148,6 +148,7 @@ lesEvenements.affiche = function() {
 	var n = this.ecrit() ;		//1. écrit les évènements
 	n += this.rendVisible();	//2. Rend visible ceux qui doivent l'être
 	messager.fade() ;			//3. Efface le messager
+	console.log("Affichage de " + n + " événéments") ;
 	return n ;
 } ;
 	
@@ -317,7 +318,6 @@ lesEvenements.modifie = function(oJson) {
 	if (donnees.triEvenement == 1) this.donnees.sort(triparDateInverse) ;
 	else this.donnees.sort(triparDate) ;
 	lesEvenements.affiche() ;
-	$('evenement' + oJson.num).scrollTo() ;
 	//Est-ce que cet évènement est un nouvel élément à ajouter à la liste des évènements pères potentiels ?
 	if (["4","5","8","9","10"].indexOf(oJson.typeeve) > -1) {
 		//potentiellement
@@ -325,6 +325,8 @@ lesEvenements.modifie = function(oJson) {
 			donnees.evenementsPeres.push({"cle":oJson.num, "valeur":oJson.description.slice(0,50) + " (" + oJson.andebut + " - " + oJson.anfin + ")"}) ;
 		}
 	} ;
+	console.log("0 - Je scrolle sur l'événément " + oJson.num) ;
+	$('evenement' + oJson.num).scrollTo() ;
 } ;
 
 lesEvenements.form = function(x, option) {

@@ -171,8 +171,9 @@ function coreObjet (nom) {
 				"method" : "post",
 				"postBody" : $('edition').serialize(),
 				"onSuccess": function(requester) {
-					that.modifie(requester.responseJSON[that.objetNom]) ;
 					messager.fade() ;
+					that.modifie(requester.responseJSON[that.objetNom]) ;
+					console.log("fin de sendForm.") ;
 				}
 			}) ;
 		}
